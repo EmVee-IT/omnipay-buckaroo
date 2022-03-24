@@ -8,9 +8,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: php-actions/composer@v5
-      - name: PHPUnit Tests
-        uses: php-actions/phpunit@v3
+
+      - name: Setup PHP with composer and phpunit
+        uses: shivammathur/setup-php@v2
         with:
-          configuration: phpunit.xml.dist
-          memory_limit: 256M
+          php-version: '8.1'
+          extensions: bcmath
+          tools: phpunit:9.5, composer:v2
+
+      - name: Composer install
+        run: composer install --prefer-dist --no-interaction --profile
+
+      - name: Composer Update
+        run: composer update --prefer-lowest --prefer-dist --no-interaction --profile -vvv
+
+      - name: Test with phpunit
+        run: vendor/bin/phpunit --coverage-text
