@@ -1,0 +1,34 @@
+{
+    "name": "emvee-it/omnipay-buckaroo",
+    "type": "library",
+    "description": "Buckaroo Gateway for Omnipay",
+    "require": {
+        "omnipay/common": "^3.2",
+        "ext-json": "*",
+        "php-http/guzzle6-adapter": "2.x-dev"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Omnipay\\Buckaroo\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Omnipay\\Buckaroo\\Test\\": "tests"
+        }
+    },
+    "authors": [
+        {
+            "name": "Michael Voeten",
+            "email": "michael@emvee-it.nl"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require-dev": {
+        "omnipay/tests": "4.1.x-dev"
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}
