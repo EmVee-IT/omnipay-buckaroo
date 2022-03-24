@@ -19,8 +19,5 @@ jobs:
       - name: Composer install
         run: composer install --prefer-dist --no-interaction --profile
 
-      - name: Composer Update
-        run: composer update --prefer-lowest --prefer-dist --no-interaction --profile -vvv
-
       - name: Test with phpunit
         run: vendor/bin/phpunit --coverage-text
