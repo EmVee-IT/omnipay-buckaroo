@@ -13,20 +13,18 @@ class RefundRequest extends TransactionRequest
      */
     public function getData(): array
     {
-        return [
-            'Currency' => $this->getCurrency(),
+        $data = parent::getData();
+
+        return array_merge($data, [
             'AmountCredit' => $this->getAmount(),
-            'Invoice' => $this->getDescription(),
             'OriginalTransactionKey' => $this->getTransactionId(),
-            'Services' => [
-                    'ServiceList' => [
-                        [
-                            'Name' => 'ideal',
-                            'Action' => 'Refund'
-                        ]
-                    ]
+            'Services' => [ 'ServiceList' => [
+                [
+                    'Name' => 'ideal',
+                    'Action' => 'Refund'
                 ]
-        ];
+            ]]
+        ]);
     }
 
     public function sendData($data): RefundResponse

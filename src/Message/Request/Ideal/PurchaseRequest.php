@@ -13,19 +13,17 @@ class PurchaseRequest extends TransactionRequest
      */
     public function getData(): array
     {
-        $data = [
-            'Currency' => $this->getCurrency(),
+        $data = parent::getData();
+
+        $data = array_merge($data, [
             'AmountDebit' => $this->getAmount(),
-            'Invoice' => $this->getDescription(),
-            'Services' => [
-                'ServiceList' => [
+            'Services' => [ 'ServiceList' => [
                     [
                         'Name' => 'ideal',
                         'Action' => 'Pay'
                     ]
-                ]
-            ]
-        ];
+            ]]
+        ]);
 
         if ($this->getIssuer()) {
             $data['Services']['ServiceList'][0]['Parameters'] = [

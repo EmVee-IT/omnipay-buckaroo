@@ -9,7 +9,15 @@ class TransactionRequest extends AbstractBuckarooRequest
 
     public function getData()
     {
-        // TODO: Implement getData() method.
+        $data = [
+            'Currency' => $this->getCurrency(),
+            'Invoice' => $this->getDescription(),
+            'Services' => [
+                'ServiceList' => []
+            ]
+        ];
+
+        return $data;
     }
 
     public function sendData($data)
