@@ -44,6 +44,7 @@ class IdealTest extends GatewayTestCase
 
         $this->assertFalse($response->isSuccessful());
         $this->assertTrue($response->isPending());
+        $this->assertFalse($response->isCancelled());
         $this->assertNotNull($response->getRedirectUrl());
 
         $this->assertEquals(32, strlen($response->getTransactionId()));
