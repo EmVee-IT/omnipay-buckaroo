@@ -16,7 +16,8 @@ class TransactionRequest extends AbstractBuckarooRequest
     {
         return $this->sendRequest(
             self::POST,
-            $data
+            $data,
+            'Transaction'
         );
     }
 }

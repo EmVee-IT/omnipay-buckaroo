@@ -2,7 +2,7 @@
 
 namespace Omnipay\Buckaroo\Gateway;
 
-class Ideal extends Transaction
+class Ideal extends BuckarooGateway
 {
     /**
      * @inheritDoc

@@ -19,6 +19,12 @@ class IdealTest extends TestCase
         $this->gateway->setSecretKey('pKtbrbgnW3GsEid337ifBzZjJbv2zscv');
     }
 
+    public function testGetIssuers()
+    {
+        $this->assertArrayHasKey('KNABNL2H', $this->gateway->getIssuers());
+        $this->assertArrayHasKey('SNSBNL2A', $this->gateway->getIssuers());
+    }
+
     public function testPurchase()
     {
 //        $description = 'iDeal_Test_' . time();

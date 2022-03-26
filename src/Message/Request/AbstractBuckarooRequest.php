@@ -52,10 +52,10 @@ abstract class AbstractBuckarooRequest extends AbstractRequest
      * @param array|null $data
      * @return void
      */
-    protected function sendRequest($method, array $data)
+    protected function sendRequest($method, array $data, $endpoint)
     {
         $url = ($this->getTestMode()? self::ENDPOINT_TEST : self::ENDPOINT_LIVE);
-        $url .= 'Transaction';
+        $url .= $endpoint;
 
         $data = json_encode($data);
         $headers = [
