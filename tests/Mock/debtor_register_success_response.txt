@@ -1,0 +1,4 @@
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{"Key":"186514D54F074AC28B568F59E2DE98C5","Status":{"Code":{"Code":190,"Description":"Success"},"SubCode":{"Code":"S001","Description":"Transaction successfully processed"},"DateTime":"2022-03-26T13:49:41"},"RequiredAction":null,"Services":[{"Name":"CreditManagement3","Action":null,"Parameters":[{"Name":"DebtorGuid","Value":"CFA3D69CFBB1477F8ADF804DBAC57D79"}]}],"CustomParameters":null,"AdditionalParameters":null,"RequestErrors":null,"ServiceCode":"CreditManagement3","IsTest":true,"ConsumerMessage":null}

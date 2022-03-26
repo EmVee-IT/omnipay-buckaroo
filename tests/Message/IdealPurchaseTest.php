@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\Buckaroo\Tests\Message\Ideal;
+namespace Omnipay\Buckaroo\Test\Message;
 
 use Omnipay\Buckaroo\Message\Request\Ideal\PurchaseRequest;
 use Omnipay\Buckaroo\Message\Response\Ideal\PurchaseResponse;
@@ -49,6 +49,7 @@ class IdealPurchaseTest extends TestCase
         $this->assertInstanceOf(PurchaseResponse::class, $response);
         $this->assertFalse($response->isSuccessful());
         $this->assertTrue($response->isPending());
+        $this->assertFalse($response->isCancelled());
         $this->assertSame('Ideal_Test_1648289452', $response->getTransactionReference());
         $this->assertNotNull($response->getRedirectUrl());
     }
