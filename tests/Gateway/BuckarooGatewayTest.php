@@ -5,18 +5,30 @@ namespace Omnipay\Buckaroo\Test\Gateway;
 use Omnipay\Buckaroo\Gateway\BuckarooGateway;
 use Omnipay\Common\GatewayInterface;
 use Omnipay\Omnipay;
-use PHPUnit\Framework\TestCase;
+use Omnipay\Tests\GatewayTestCase;
 
-class BuckarooGatewayTest extends TestCase
+class BuckarooGatewayTest extends GatewayTestCase
 {
     /**
      * @var GatewayInterface
      */
-    protected GatewayInterface $gateway;
+    protected $gateway;
 
     protected function setUp(): void
     {
         $this->gateway = Omnipay::create(BuckarooGateway::class);
+        $this->gateway->initialize([
+            'websiteKey' => 'foo123',
+            'secretKey' => 'bar456',
+            'testMode' => true,
+        ]);
+    }
+
+    public function testGetData()
+    {
+        $this->assertSame('foo123', $this->gateway->getWebsiteKey());
+        $this->assertSame('bar456', $this->gateway->getSecretKey());
+        $this->assertTrue($this->gateway->getTestMode());
     }
 
     /**

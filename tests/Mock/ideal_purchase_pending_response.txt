@@ -1,0 +1,4 @@
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{"Key":"F0855F2D4C41432090AE0B64DD6F4793","Status":{"Code":{"Code":790,"Description":"Pending input"},"SubCode":null,"DateTime":"2022-03-26T11:10:53"},"RequiredAction":{"RedirectURL":"https://testcheckout.buckaroo.nl/html/redirect.ashx?r=B9CC2C9E5EF04984AB417C2A873A1D92","RequestedInformation":null,"PayRemainderDetails":null,"Name":"Redirect","TypeDeprecated":0},"Services":null,"CustomParameters":null,"AdditionalParameters":null,"RequestErrors":null,"Invoice":"Ideal_Test_1648289452","ServiceCode":null,"IsTest":true,"Currency":"EUR","AmountDebit":0.01,"TransactionType":null,"MutationType":0,"RelatedTransactions":null,"ConsumerMessage":null,"Order":null,"IssuingCountry":null,"StartRecurrent":false,"Recurring":false,"CustomerName":null,"PayerHash":null,"PaymentKey":null}

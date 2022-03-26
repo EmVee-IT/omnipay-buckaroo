@@ -7,7 +7,7 @@ class Ideal extends BuckarooGateway
     /**
      * @inheritDoc
      */
-    public function getName()
+    public function getName(): string
     {
         return 'Buckaroo iDeal';
     }

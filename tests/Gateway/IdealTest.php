@@ -1,22 +1,28 @@
 <?php
 
+
 namespace Omnipay\Buckaroo\Test\Gateway;
 
 use Omnipay\Buckaroo\Gateway\Ideal;
-use Omnipay\Buckaroo\Message\Response\Ideal\PurchaseResponse;
-use Omnipay\Omnipay;
-use PHPUnit\Framework\TestCase;
+use Omnipay\Buckaroo\Test\Gateway\PurchaseResponse;
+use Omnipay\Common\GatewayInterface;
+use Omnipay\Tests\GatewayTestCase;
 
-class IdealTest extends TestCase
+class IdealTest extends GatewayTestCase
 {
-    protected \Omnipay\Common\GatewayInterface $gateway;
+    /**
+     * @var GatewayInterface
+     */
+    protected $gateway;
 
     protected function setUp(): void
     {
-        $this->gateway = Omnipay::create(\Omnipay\Buckaroo\Gateway\Ideal::class);
-        $this->gateway->setTestMode(true);
-        $this->gateway->setWebsiteKey('WglTrRZsVG');
-        $this->gateway->setSecretKey('pKtbrbgnW3GsEid337ifBzZjJbv2zscv');
+        $this->gateway = new Ideal($this->getHttpClient(), $this->getHttpRequest());
+        $this->gateway->initialize([
+            'websiteKey' => 'foo123',
+            'secretKey' => 'bar456',
+            'testMode' => true,
+        ]);
     }
 
     public function testGetIssuers()
@@ -27,31 +33,33 @@ class IdealTest extends TestCase
 
     public function testPurchase()
     {
-//        $description = 'iDeal_Test_' . time();
-//        /** @var PurchaseResponse $response */
-//        $response = $this->gateway->purchase([
-//            'amount' => '10.00',
-//            'description' => $description,
-//            'currency' => 'EUR',
-//            'issuer' => 'ABNANL2A'
-//        ])->send();
-//
-//        $this->assertEquals(true, $response->isPending());
-//        $this->assertEquals(32, strlen($response->getTransactionId()));
-//        $this->assertEquals($description, $response->getTransactionReference());
-        $this->assertTrue(true);
+        $this->setMockHttpResponse('ideal_purchase_pending_response.txt');
+        /** @var PurchaseResponse $response */
+        $response = $this->gateway->purchase([
+            'amount' => '10.00',
+            'description' => 'Ideal_Test_1648289452',
+            'currency' => 'EUR',
+            'issuer' => 'ABNANL2A'
+        ])->send();
+
+        $this->assertFalse($response->isSuccessful());
+        $this->assertTrue($response->isPending());
+        $this->assertNotNull($response->getRedirectUrl());
+
+        $this->assertEquals(32, strlen($response->getTransactionId()));
     }
 
-    public function testRefund()
+    public function testRefundSuccess()
     {
-//        $response = $this->gateway->refund([
-//            'amount' => '10.00',
-//            'transactionId' => '7198CD88018D4AC78B909D882C3D2B5B',
-//            'currency' => 'EUR',
-//            'description' => 'iDeal_Test_1648081681'
-//        ])->send();
-//
-//        $this->assertEquals(true, $response->isSuccessful());
-        $this->assertTrue(true);
+        $this->setMockHttpResponse('ideal_refund_success_response.txt');
+
+        $response = $this->gateway->refund([
+            'amount' => '0.01',
+            'transactionId' => '3C9C00766C584523AC04A9523F946523',
+            'currency' => 'EUR',
+            'description' => 'Ideal_Test_1648289452'
+        ])->send();
+
+        $this->assertTrue($response->isSuccessful());
     }
 }
