@@ -84,14 +84,16 @@ trait Debtor
      */
     public function getCode(): array
     {
+        $code = $this->getParameter('code')?:
+            $this->getParameter('firstName') .
+            $this->getParameter('lastName') .
+            rand(00,99);
+
         return [
             'Name' => 'Code',
             'GroupType' => 'Debtor',
             'GroupID' => '',
-            'Value' => ($this->getParameter('code')?:
-                $this->getParameter('firstName') .
-                $this->getParameter('lastName') .
-                rand(00,99))
+            'Value' => $code
         ];
     }
 
@@ -341,10 +343,9 @@ trait Debtor
         }
 
         $countryCode = $countryCode?: $this->getParameter('country');
+        $number = PhoneNumber::parse($value, $countryCode);
 
-        try {
-            $number = PhoneNumber::parse($value, $countryCode);
-        } catch (PhoneNumberParseException $e) {
+        if (!$number->isValidNumber()) {
             throw new \Exception('Invalid phonenumber');
         }
 

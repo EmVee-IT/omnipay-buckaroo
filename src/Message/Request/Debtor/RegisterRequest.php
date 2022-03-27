@@ -28,9 +28,12 @@ class RegisterRequest extends DataRequest implements DebtorInterface
             $this->getStreet(),
             $this->getHouseNumber(),
             $this->getMobile(),
+            $this->getLandline(),
             $this->getZipcode(),
             $this->getCity(),
-            $this->getCountry()
+            $this->getCountry(),
+            $this->getBirthDate(),
+            $this->getGender()
         ];
 
         return array_merge($data, [

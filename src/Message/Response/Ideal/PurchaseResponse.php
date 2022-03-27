@@ -18,11 +18,17 @@ class PurchaseResponse extends AbstractBuckarooResponse
 
     public function getCode()
     {
+        if ($this->data['Status']['SubCode'] == null) {
+            return null;
+        }
         return $this->data['Status']['SubCode']['Code'];
     }
 
     public function getMessage()
     {
+        if ($this->data['Status']['SubCode'] == null) {
+            return null;
+        }
         return $this->data['Status']['SubCode']['Description'];
     }
 

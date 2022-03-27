@@ -52,5 +52,6 @@ class IdealPurchaseTest extends TestCase
         $this->assertFalse($response->isCancelled());
         $this->assertSame('Ideal_Test_1648289452', $response->getTransactionReference());
         $this->assertNotNull($response->getRedirectUrl());
+        $this->assertNull($response->getCode());
     }
 }

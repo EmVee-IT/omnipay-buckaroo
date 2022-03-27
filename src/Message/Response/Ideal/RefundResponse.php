@@ -13,7 +13,7 @@ class RefundResponse extends AbstractBuckarooResponse
 
     public function getTransactionReference()
     {
-        return $this->data['RelatedTransactions']['RelatedTransactionKey'];
+        return $this->data['RelatedTransactions'][0]['RelatedTransactionKey'];
     }
 
     public function getCode()

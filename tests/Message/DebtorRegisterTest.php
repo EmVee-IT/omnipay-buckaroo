@@ -3,6 +3,7 @@
 namespace Omnipay\Buckaroo\Test\Message;
 
 use Omnipay\Buckaroo\Message\Request\Debtor\RegisterRequest;
+use Omnipay\Buckaroo\Message\Response\Debtor\RegisterResponse;
 use Omnipay\Tests\TestCase;
 
 class DebtorRegisterTest extends TestCase
@@ -41,5 +42,16 @@ class DebtorRegisterTest extends TestCase
         $this->assertSame('bar456', $this->request->getSecretKey());
 
         $this->assertSame('John', $this->request->getFirstName()['Value']);
+    }
+
+    public function testSendSuccess()
+    {
+        $this->setMockHttpResponse('debtor_register_success_response.txt');
+        $response = $this->request->send();
+
+        $this->assertInstanceOf(RegisterResponse::class, $response);
+        $this->assertSame('186514D54F074AC28B568F59E2DE98C5', $response->getTransactionId());
+        $this->assertSame('S001', $response->getCode());
+        $this->assertSame('Transaction successfully processed', $response->getMessage());
     }
 }
