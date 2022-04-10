@@ -120,4 +120,61 @@ trait Subscriptions
             'description' => 'The mandate reference for SEPA Direct Debits. It is possible to provide your own unique reference, or to use the mandateID from an Emandate, In any case, the MandateReference should always begin with a three digit prefix which can be found in the Sepadirectdebit subscription details in your Buckaroo account. If B2B = True is provided in the request, then the MandateReference should be registered with the customer bank for B2B SEPA Direct Debits.'
         ]
     ];
+
+    /**
+     * @param string $value
+     * @return SubscriptionsInterface
+     */
+    public function setConfigurationCode(string $value): SubscriptionsInterface
+    {
+        return $this->setParameter('configurationCode', $value);
+    }
+
+    /**
+     * @param string $value
+     * @return SubscriptionsInterface
+     */
+    public function setRatePlanCode(string $value): SubscriptionsInterface
+    {
+        return $this->setParameter('ratePlanCode', $value);
+    }
+
+    /**
+     * @param string $value
+     * @return SubscriptionsInterface
+     */
+    public function setStartDate(string $value): SubscriptionsInterface
+    {
+        return $this->setParameter('startDate', $value);
+    }
+
+    /**
+     * @param string $value
+     * @return SubscriptionsInterface
+     */
+    public function setDebtorCode(string $value): SubscriptionsInterface
+    {
+        return $this->setParameter('debtorCode', $value);
+    }
+
+    public function __call(string $name, array $arguments)
+    {
+        $parameter = lcfirst(substr($name, 3));
+        if (str_starts_with($name, 'set')) {
+            if (!method_exists($this, $name)) {
+                $this->setParameter($parameter, ...$arguments);
+            }
+        }
+
+        if (str_starts_with($name, 'get')) {
+            if (isset($this->availableParameters[$parameter])) {
+                return [
+                    'Name' => $this->availableParameters[$parameter]['name'],
+                    'GroupType' => $this->availableParameters[$parameter]['group'],
+                    'GroupID' => '',
+                    'Value' => $this->getParameter($parameter)
+                ];
+            }
+        }
+    }
 }

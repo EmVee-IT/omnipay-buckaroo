@@ -27,6 +27,9 @@ class SubscriptionsTest extends GatewayTestCase
 
         $response = $this->gateway->register([
             'configurationCode' => 'foo123',
+            'ratePlanCode' => '123ase1',
+            'startDate' => '23-12-2022',
+            'debtorCode' => 'FirstName22'
         ])->send();
 
         $this->assertTrue($response->isSuccessful());
