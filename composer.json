@@ -32,5 +32,12 @@
     },
     "scripts": {
         "test": "phpunit"
+    },
+    "repositories": {
+        "packagist.org": false,
+        "private-packagist": {
+            "type": "composer",
+            "url": "https://repo.packagist.com/emvee-it/"
+        }
     }
 }
